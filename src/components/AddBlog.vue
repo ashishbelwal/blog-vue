@@ -103,7 +103,8 @@ export default {
             body: this.body,
             id: Math.floor(100000 + Math.random() * 900000),
             title: this.title,
-            userId: 1
+            userId: 1,
+            author: this.author
         }
         this.addBlog(content);
         alert("New Blog has been added");

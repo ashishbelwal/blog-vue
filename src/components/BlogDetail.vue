@@ -64,6 +64,16 @@
       id="highLightBtn"
       @click="textHighlightClick"
     >Highlight</v-btn>
+    <v-btn
+      color="green"
+      elevation="0"
+      rounded
+      dark
+      small
+      class="highLightBtn"
+      id="addWord"
+      @click="addToWordlist"
+    >Add to Wordlist</v-btn>
   </v-container>
 </template>
 
@@ -88,7 +98,7 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
       body:""
     }),
     methods: {
-      ...mapActions(["fetchBlogWithId", "deleteBlog"]),
+      ...mapActions(["fetchBlogWithId", "deleteBlog", "addWord"]),
       deleteThisBlog(){
         alert("This blog is deleted")
         this.deleteBlog(this.$route.params.id)
@@ -100,6 +110,9 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
           document.getElementById('highLightBtn').style.opacity = "0";
           document.getElementById('highLightBtn').style.top = 0 +'px';
           document.getElementById('highLightBtn').style.left = 0 +'px';
+          document.getElementById('addWord').style.opacity = "0";
+          document.getElementById('addWord').style.top = 0 +'px';
+          document.getElementById('addWord').style.left = 0 +'px';
         }
       },
       textHigh(event){
@@ -108,6 +121,9 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
           document.getElementById('highLightBtn').style.opacity = "1";
           document.getElementById('highLightBtn').style.top = (event.clientY - 50)+'px';
           document.getElementById('highLightBtn').style.left = (event.clientX - 75)+'px';
+          document.getElementById('addWord').style.opacity = "1";
+          document.getElementById('addWord').style.top = (event.clientY - 80)+'px';
+          document.getElementById('addWord').style.left = (event.clientX - 75)+'px';
         }
         
         console.log(this.cursorX, this.cursorY)
@@ -127,7 +143,18 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
         return this.body.replace(new RegExp(this.query, "gi"), match => {
             return '<span class="highlightText">' + match + '</span>';
         });
-    }
+      },
+      addToWordlist(){
+        let word = document.getSelection().toString().replace(/[^a-zA-Z0-9]/g, '');
+        console.log(word);
+        this.addWord(word);
+        document.getElementById('highLightBtn').style.opacity = "0";
+        document.getElementById('highLightBtn').style.top = 0 +'px';
+        document.getElementById('highLightBtn').style.left = 0 +'px';
+        document.getElementById('addWord').style.opacity = "0";
+        document.getElementById('addWord').style.top = 0 +'px';
+        document.getElementById('addWord').style.left = 0 +'px';
+      }
     },
     computed: mapGetters(["blogWithId"]),
     created() {
@@ -228,6 +255,7 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
             margin-bottom: 5px;
             padding-right: 16px;
             margin-top: 40px;
+            cursor: initial;
           }
         
       }

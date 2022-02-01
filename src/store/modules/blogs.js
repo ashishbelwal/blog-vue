@@ -1,12 +1,14 @@
 import axios from 'axios';
 const state = {
     blogs: [ ],
-    blog: ''
+    blog: '',
+    wordList: []
   };
   
   const getters = {
     allBlogs: state => state.blogs,
-    blogWithId: state => state.blog
+    blogWithId: state => state.blog,
+    allWordList: state => state.wordList
   };
   
   const actions = {
@@ -33,13 +35,19 @@ const state = {
           title: content.title,
           body: content.body,
           userId: content.userId,
-          id: content.id, completed: false }
+          id: content.id, 
+          author: content.author,
+          completed: false }
       );
   
       commit('newBlog', response.data);
     },
     async deleteBlog({ commit }, id) {
       commit('removeBlog', id);
+    },
+    async addWord({commit}, word){
+      commit('newWord', word)
+      console.log(state.wordList)
     },
     async filterBlogs({ commit }, e) {
       // Get selected number
@@ -54,7 +62,7 @@ const state = {
       commit('setBlogs', response.data);
     },
     async updateBlog({ commit }, updBlog) {
-      const response = updBlog
+      const response = updBlog;
       commit('updateBlog', response);
     }
   };
@@ -76,7 +84,8 @@ const state = {
           state.blogs[index] = updBlog
         }
       })
-    }
+    },
+    newWord: (state, word) => state.wordList.unshift(word)
   };
   
   export default {

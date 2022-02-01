@@ -292,6 +292,7 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
     computed: mapGetters(["allBlogs"]),
     created() {
       this.fetchBlogs();
+      console.log(this.allBlogs)
     }
   }
 </script>
@@ -367,6 +368,8 @@ import { mdiLabelMultiple, mdiCommentEyeOutline, mdiExportVariant, mdiBookmarkOu
     .blogContent{
       display: flex;
       cursor: pointer;
+          width: 100%;
+    justify-content: space-between;
       .blogDesc{
         .author{
           display: flex;

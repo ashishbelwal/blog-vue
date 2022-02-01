@@ -87,7 +87,7 @@ export default {
         author: "this.blogWithId[0].author",
         authorRules: [
             v => !!v || 'Name is required',
-            v => (v && v.length <= 5) || 'Author name must be greater than 5 characters',
+            v => (v && v.length >= 5) || 'Author name must be greater than 5 characters',
         ],
         body: "this.blogWithId[0].title",
         bodyRules: [
@@ -103,7 +103,8 @@ export default {
             body: this.body,
             id: this.$route.params.id,
             title: this.title,
-            userId: 1
+            userId: 1,
+            author: this.author
         }
         this.updateBlog(content);
         alert("New Blog has been edited");

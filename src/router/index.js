@@ -30,6 +30,11 @@ const routes = [
         name: 'EditBlog',
         component: () => import("@/components/EditBlog"),
       },
+      {
+        path: "/wordList",
+        name: "WordList",
+        component: () => import("@/components/WordList"),
+      },
     ]
   },
 ]

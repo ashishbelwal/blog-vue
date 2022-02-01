@@ -25,9 +25,9 @@
       <v-btn
         target="_blank"
         text
-        @click="$router.push('/addBlog')"
+        @click="$router.push('/wordList')"
       >
-        <span class="mr-2">New Blog</span>
+        <span class="mr-2">Word List</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
         </v-row>
